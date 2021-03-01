@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Get sum of all the digits till answer is single digit</title>
+<script>
+function getDigitSum(num){
+    if(num<10){
+        return num;
+    }
+    const sum = num%10+getDigitSum(parseInt(num/10));
+    if(sum>9){
+        return getDigitSum(sum);
+    }
+    return sum;
+}
+
+function getNumberBetweenRangeWithDigitSum(fromRaw, tillRaw, digitSum){
+    const from = fromRaw<=tillRaw ? fromRaw:tillRaw;
+    const till = fromRaw<=tillRaw?tillRaw: fromRaw;
+    const solutions = [];
+    for(let i=from;i<=till;i+=1){
+        if(getDigitSum(i)===digitSum){
+            solutions.push(i);
+        }
+    }
+    return solutions;
+}
+function clear(){
+	document.getElementById('output').innerText = '';
+	document.getElementById('wording').innerText = '';
+	document.getElementById('count').innerText = '';
+}
+function setList(numbers, shouldSetCount){
+		document.getElementById('output').innerHTML = numbers.map(item=>'<span>'+item+'</span>').join('');
+		if(shouldSetCount){
+			document.getElementById('count').innerText = 'Total ' + numbers.length + ' found'
+		}else{
+			document.getElementById('count').innerText = 'No';
+		}
+}
+let from, till, sum=1;
+function setWording(){
+	
+}
+function onChange(){
+	if(isNaN(from) && isNaN(till)){
+		clear();
+		return
+	}
+	let digits = [];
+	let statement = '';
+	if(isNaN(from)||isNaN(till)){
+		const fixedNumber = isNaN(from)?till:from;
+		const digitSum = getDigitSum(fixedNumber);
+		statement = 'Does sum of digits of ' + fixedNumber + ' equals ' + sum +'?'; 
+		if(digitSum===sum){
+			digits = ['Yes'];
+		}
+	}else{
+		digits = getNumberBetweenRangeWithDigitSum(from, till, sum);
+		statement = 'Numbers between ' + from + ' and ' + till +' which have sum of digits equal to ' + sum;
+	}
+	document.getElementById('wording').innerText = statement;
+	setList(digits, digits.length);
+}
+function setFrom(value){
+	from = value;
+	onChange();
+}
+function setTill(value){
+	till = value;
+	onChange();
+}
+function setSum(value){
+	sum = value;
+	onChange();
+}
+function onFromChange(value){
+	const v = parseInt(value, 10);
+	setFrom(v);
+}
+function onTillChange(value){
+	const v = parseInt(value, 10);
+	setTill(v);
+}
+function onSumChange(value){
+	const v = parseInt(value, 10);
+	setSum(v);
+}
+</script>
+<style>
+	body{
+		color: #373839;
+		display: flex;
+		justify-content: center;
+	}
+	.body-inner{
+	}
+	*{
+		box-sizing: border-box;
+		font-family: Roboto, sans-serif;
+	}
+	.form{
+		display: flex;
+		justify-content: flex-start;
+		margin-bottom: 1rem;
+	}
+	.input-container{
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		margin-right: 1rem;
+	}
+	.input-container div{
+		margin-bottom: .25rem;
+	}
+	.input-container select, .input-container input{
+		width: 11rem;
+		height: 2rem;
+		padding-left: 0.25rem;
+		padding-right: 0.25rem;
+		border: solid 1px #787878bf;
+    	border-radius: 6px;
+	}
+	#wording{
+		font-size: 1.1rem;
+		text-align: left;
+	}
+	.output-container{
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		font-size: 1.5rem;
+	}
+	#output{
+		text-align: right;
+		display: flex;
+		flex-direction: column;
+	}
+</style>
+</head>
+<body>
+	<div class='body-inner'>
+		<div class='form'>
+			<div class='input-container'>
+				<div>Starting from</div>
+				<input type='text' id='from' oninput='onFromChange(this.value)'/>
+			</div>
+			<div class='input-container'>
+				<div>Up to</div>
+				<input type='text' id='till' oninput='onTillChange(this.value)'/>
+			</div>
+			<div class='input-container'>
+				<div>Sum of digits</div>
+				<select value='1' oninput='onSumChange(this.value)'>
+					<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>
+				</select>
+			</div>
+		</div>
+		<div id='wording'></div>
+		<div id='count'></div>
+		<div class='output-container'>
+			<div id='output'>
+			</div>
+		</div>
+	</div>
+</body>
+	
