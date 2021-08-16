@@ -16,8 +16,8 @@
         function detectDownloader(){
             const html = document.documentElement.innerHTML;
             try{
-                const isInsiderIDM = html.indexOf('inject_idm') > -1;
-                return true;
+                const isInsiderIDM = html.indexOf('injec'+'t_'+'idm') > -1;
+                return isInsiderIDM;
             } catch(e){
                 console.error(e)
             }
@@ -44,10 +44,10 @@
 </head>
 <body>
     <h1>Download current html of the current page</h1>
-    <button onclick="copyCurrentHTML()" style="color: white;background: #107cd2;border: none;padding: 12px 12px;border-radius: 8px;">
+    <button onclick="copyCurrentHTML()" style="color: white;background: #107cd2;border: solid 1px #208ce2;border: none;padding: 12px 12px;border-radius: 8px;">
         Copy Current HTML to Clipboard
     </button>
-    <button onclick="detectDownloaderAndTakeAction()">Detect Downloader</button>
+    <button onclick="detectDownloaderAndTakeAction()"  style="color: black;background: #fff;border: solid 1px #e0e0e0;padding: 12px 12px;border-radius: 8px;">Detect Downloader</button>
     <h3>If not copied automatically, select all content of the input box below and copy.</h3>
     <div>
         <input id='input' style='height:48px;width: 100%'  />
