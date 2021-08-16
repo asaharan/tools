@@ -7,11 +7,33 @@
     <title>Copy current HTML of the page to clipboard</title>
     <script>
         function copyCurrentHTML(){
-            const html = document.getElementById('root').innerHTML;
+            const html = document.documentElement.innerHTML;
             console.log(window.copy);
             if(window.copy){window.copy(html)}
             document.getElementById('input').value = html;
             document.getElementById('input').select()
+        }
+        function detectDownloader(){
+            const html = document.documentElement.innerHTML;
+            try{
+                const isInsiderIDM = html.indexOf('inject_idm') > -1;
+                return true;
+            } catch(e){
+                console.error(e)
+            }
+        }
+        function detectDownloaderAndTakeAction(){
+            const hasDownloader = detectDownloader();
+            if(hasDownloader){
+                alert('Downloader detected')
+            }else{
+                console.log('You do not have any downloader')
+            }
+        }
+        window.onload = function(){
+            setTimeout(function(){
+                detectDownloaderAndTakeAction()
+            },500)
         }
     </script>
     <style>
@@ -25,6 +47,7 @@
     <button onclick="copyCurrentHTML()" style="color: white;background: #107cd2;border: none;padding: 12px 12px;border-radius: 8px;">
         Copy Current HTML to Clipboard
     </button>
+    <button onclick="detectDownloaderAndTakeAction()">Detect Downloader</button>
     <h3>If not copied automatically, select all content of the input box below and copy.</h3>
     <div>
         <input id='input' style='height:48px;width: 100%'  />
