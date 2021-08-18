@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create array from list</title>
+    <script>
+        function generateOutput(){
+            const itemsString = document.getElementById('list-input').value;
+            const wrapperFnName = document.getElementById('function-input').value;
+            const stringList = itemsString.split('\n');
+            const finalOutput = `[${stringList.map(item=>`${wrapperFnName}('${item}')`).join(',')}]`
+            document.getElementById('output').value = `var list=${finalOutput}`
+        }
+        function setFunctionInput(fnName){
+            document.getElementById('function-input').value = fnName;
+        }
+    </script>
+    <style>
+        *,*::after,*::before{
+            box-sizing: border-box;
+        }
+        input{
+            width:100%;
+            height: 48px;
+        }
+        textarea{
+            width: 100%;
+            height: 150px;
+        }
+        .item{
+            margin-bottom: 8px;
+        }
+        .button-primary{
+            height: 44px;
+            width: 200px;
+            border: none;
+            background-color: lightcoral;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+    <h3>Create array from list</h3>
+    <div>
+        <div class="item">
+            <button onclick="setFunctionInput('ObjectId')">ObjectId</button>
+        </div>
+        <div class="item">
+            <input id='function-input' type='text' placeholder="Function to wrap every value"/>
+        </div>
+        <div class="item">
+            <textarea placeholder="Paste list items here" id='list-input'></textarea>
+        </div>
+       <div class="item">
+            <button class="button-primary" onclick="generateOutput()">Generate</button>
+        </div>
+        <div class="item">
+            <textarea placeholder="Output" id='output'></textarea>
+        </div>
+    </div>
+</body>
+</html>

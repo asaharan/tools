@@ -17,7 +17,9 @@
             const html = document.documentElement.innerHTML;
             try{
                 const isInsiderIDM = html.indexOf('injec'+'t_'+'idm') > -1;
-                return isInsiderIDM;
+                if(isInsiderIDM){
+                    return 'idm';
+                };
             } catch(e){
                 console.error(e)
             }
@@ -51,6 +53,9 @@
     <h3>If not copied automatically, select all content of the input box below and copy.</h3>
     <div>
         <input id='input' style='height:48px;width: 100%'  />
+    </div>
+    <div>
+        This can be used to debug HTML in embedded mobile browser.
     </div>
 </body>
 </html>
