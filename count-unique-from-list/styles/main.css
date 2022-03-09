@@ -1,0 +1,28 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+body,
+html {
+  margin: 0;
+  font-family: sans-serif;
+  color: #333;
+}
+.mainBody {
+  max-width: 800px;
+  margin: 20px auto;
+}
+.mainTextarea {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  border: solid 1px #999;
+  resize: none;
+  height: 300px;
+  padding: 5px;
+}
+.divider {
+  margin: 10px auto;
+  border-top: solid 1px transparent;
+}
