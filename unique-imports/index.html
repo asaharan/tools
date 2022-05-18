@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Unique imports</title>
+        <script src="./main.js"></script>
+        <style>
+            input, textarea{
+                min-height: 48px;
+                width: 300px;
+                padding: 12px;
+                border: solid 1px #e0e0e0;
+            }
+           #output {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 12px;
+            }
+            .root {
+                padding: 12px;
+            }
+            .name{
+                font-family: sans-serif;
+                margin-right: 4px;
+            }
+            h4, h1, .name{
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Get all the imports made from a library</h1>
+        <h4>How it works?</h4>
+        <h4>Enter the library name here</h4>
+        <input type="text" oninput="onSearchTermChange(event)" value="@chakra-ui/react"/>
+        <h4>
+            Search the following regex in your project using VS Code
+        </h4>
+        <input type="text" id='vs-code-search-input' />
+        <h4>Paste the search results found (you can click open in editor and then copy the result)</h4>
+        <div>
+            <textarea style="width:100%;min-height: 300px;margin-top: 12px;" type="text" oninput="onInputChange(event)"></textarea>
+        </div>
+        <h4>
+            The number alongwith the item represents it's number of occurences
+        </h4>
+        <div>Total names imported: <span id="import-name-count"></span></div>
+        <button onclick="copyOutput()">Copy Output</button>
+        <div id="output"></div>
+    </body>
+</html>
