@@ -9,8 +9,8 @@
         function generateOutput(){
             const itemsString = document.getElementById('list-input').value;
             const wrapperFnName = document.getElementById('function-input').value;
-            const stringList = itemsString.split('\n');
-            const finalOutput = `[${stringList.map(item=>`${wrapperFnName}('${item}')`).join(',')}]`
+            const stringList = itemsString.split(/[\n,]/).map(item => item.trim());
+            const finalOutput = `[${stringList.map(item=>`${wrapperFnName}${wrapperFnName?'(':''}'${item}'${wrapperFnName?')':''}`).join(',')}]`
             document.getElementById('output').value = `var list=${finalOutput}`
         }
         function setFunctionInput(fnName){
